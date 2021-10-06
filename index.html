@@ -48,8 +48,12 @@
                         <input type="text" class="form-control" id="prodCategory">
                     </div>
                     <div class="mb-3">
-                        <label for="taskType" class="form-label">Quantity</label>
-                        <input type="text" class="form-control" id="prodQuantity">
+                        <label for="productQuantity" class="form-label">Quantity</label>
+                        <input type="number" min="0" class="form-control" id="prodQuantity">
+                    </div>
+                    <div class="mb-3">
+                        <label for="sellingPrice" class="form-label">Selling Price</label>
+                        <input type="number" min="0" class="form-control" id="sellingPrice">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -83,8 +87,12 @@
                             <input type="text" class="form-control" id="prodCategoryUpdate">
                         </div>
                         <div class="mb-3">
-                            <label for="taskType" class="form-label">Quantity</label>
-                            <input type="text" class="form-control" id="prodQuantityUpdate">
+                            <label for="productQuantity" class="form-label">Quantity</label>
+                            <input type="number" min="0" class="form-control" id="prodQuantityUpdate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="sellingPrice" class="form-label">Selling Price</label>
+                            <input type="number" min="0" class="form-control" id="sellingPriceUpdate">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -132,7 +140,7 @@
                         <thead>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Category</th>
+                            <th>Price</th>
                             <th>Quantity</th>
                             <th>Actions</th>
                         </thead>

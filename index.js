@@ -5,7 +5,8 @@ function addInventory(){
         id:`${Date.now()}`,
         name:document.getElementById("prodName").value,
         category:document.getElementById("prodCategory").value,
-        quantity:document.getElementById("prodQuantity").value
+        quantity:document.getElementById("prodQuantity").value,
+        sp:document.getElementById("sellingPrice").value
     };
 
     const tableContents=document.getElementById("inventory-tbl-body");
@@ -19,14 +20,15 @@ function addInventory(){
     document.getElementById("prodName").value="";
     document.getElementById("prodCategory").value="";
     document.getElementById("prodQuantity").value="";
+    document.getElementById("sellingPrice").value="";
 }
 
 // table row creation
-const generateTblRow=({id,name,category,quantity})=>{
+const generateTblRow=({id,name,category,quantity,sp})=>{
  return `<tr>
                         <td>${id}</td>
                         <td>${name}</td>
-                        <td>${category}</td>
+                        <td>${sp}</td>
                         <td>${quantity}</td>
                         <td>
                             <a class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#updateModal" onclick="addValuestoModal(${id})"><i class="far fa-edit"></i></a>
@@ -78,7 +80,7 @@ function addValuestoModal(id){
     let productName=document.getElementById("prodNameUpdate");
     let productCategory=document.getElementById("prodCategoryUpdate");
     let productQuantity=document.getElementById("prodQuantityUpdate");
-    
+    let productPrice=document.getElementById("sellingPriceUpdate");
     let presenttask;
     for(let i=0;i<InvData.length;i++){
         if(InvData[i]["id"]==id){
@@ -89,6 +91,7 @@ function addValuestoModal(id){
     productName.value=presenttask.name;
     productCategory.value=presenttask.category;
     productQuantity.value=presenttask.quantity;
+    productPrice.value=presenttask.sp;
     document.getElementById("IDupdate").value=id;
 }
 
@@ -98,7 +101,8 @@ function updateInventory(){
         id:document.getElementById("IDupdate").value,
         name:document.getElementById("prodNameUpdate").value,
         category:document.getElementById("prodCategoryUpdate").value,
-        quantity:document.getElementById("prodQuantityUpdate").value
+        quantity:document.getElementById("prodQuantityUpdate").value,
+        sp:document.getElementById("sellingPriceUpdate").value
     };
     console.log(newInvDetails);
     for(let i=0;i<InvData.length;i++){

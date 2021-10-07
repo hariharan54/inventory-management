@@ -146,6 +146,12 @@ function updateBillItem(){
     // console.log(Billid);
     // console.log(inventoryID);
     // console.log(enteredQ);
+    document.getElementById("billQ").value="";
+    if(enteredQ<=0){
+        alert("Invalid Quantity");
+        return;
+    }
+
     let amt=0;
     for(let i=0;i<InvData.length;i++){
         let diff=0;
@@ -182,6 +188,7 @@ function updateBillItem(){
        localStorage.setItem("billdetails",JSON.stringify({data:BillDetails}));
        document.getElementById("billing-card").innerHTML="";
        retrieveBillingLocalStorage();
+       
 }
 
 

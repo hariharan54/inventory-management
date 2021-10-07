@@ -1,12 +1,25 @@
 let InvData=[];
 
 function addInventory(){
+
+    let sellingprice=document.getElementById("sellingPrice").value;
+    let quantity=document.getElementById("prodQuantity").value;
+
+    if(sellingprice<0){
+        alert("Invalid selling price");
+        return;
+    }
+    if(quantity<=0){
+        alert("Invalid Quantity");
+        return;
+    }
+
     const newInventoryDetails={
         id:`${Date.now()}`,
         name:document.getElementById("prodName").value,
         category:document.getElementById("prodCategory").value,
-        quantity:document.getElementById("prodQuantity").value,
-        sp:document.getElementById("sellingPrice").value
+        quantity:quantity,
+        sp:sellingprice
     };
 
     const tableContents=document.getElementById("inventory-tbl-body");
@@ -97,12 +110,24 @@ function addValuestoModal(id){
 
 
 function updateInventory(){
+    let sellingprice=document.getElementById("sellingPriceUpdate").value;
+    let quantity=document.getElementById("prodQuantityUpdate").value;
+
+    if(sellingprice<0){
+        alert("Invalid selling price");
+        return;
+    }
+    if(quantity<=0){
+        alert("Invalid Quantity");
+        return;
+    }
+    
     const newInvDetails={
         id:document.getElementById("IDupdate").value,
         name:document.getElementById("prodNameUpdate").value,
         category:document.getElementById("prodCategoryUpdate").value,
-        quantity:document.getElementById("prodQuantityUpdate").value,
-        sp:document.getElementById("sellingPriceUpdate").value
+        quantity:quantity,
+        sp:sellingprice
     };
     console.log(newInvDetails);
     for(let i=0;i<InvData.length;i++){

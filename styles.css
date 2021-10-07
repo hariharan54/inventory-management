@@ -8,9 +8,15 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .inventory-card {
   margin-top: 20px;
   padding: 20px;
+}
+
+#bill-tbl {
+  overflow-y: scroll;
 }

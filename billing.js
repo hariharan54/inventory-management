@@ -70,19 +70,22 @@ function addToBill(){
 }
 
 const generateRow=({id,title},details)=>{
- return `<div class="card col-12 col-md-6 col-lg-4" id="">
+ return `<div class="card col-12 col-md-6 col-lg-4" style="margin:10px">
                 
                     <div class="card-header">
-                        <div class="d-flex justify-content-end">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal"
-                                onclick="addBillItems('${id}')"><i class="fas fa-plus"></i><a>
-                                    <a onclick="deleteCard('${id}')" class="btn btn-primary ml-1"><i class="fas fa-trash"></i><a>
+                        <div class="row">
+                            <div class="col-7"><h4>${title}</h4></div>
+                            <div class="col-5 d-flex justify-content-end">
+                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal"
+                                onclick="addBillItems('${id}')"><i class="fas fa-plus" style="color: white;"></i><a>
+                                <a onclick="deleteCard('${id}')" class="btn btn-primary ml-1"><i class="fas fa-trash" style="color: white;"></i><a>
+                            </div>
                         </div>
+                        
                     </div>
                     <div class="card-body">
-                        <h4>${title}</h4>
-                        <p>No of Items:${details.itemsID.length}</p>
-                        <span class="badge bg-success">Bill amount:${Number(details.billAmt)}</span>
+                        <h5><span class="badge badge-pill badge-primary">No of Items:${details.itemsID.length}</span></h5>
+                        <strong><p>Total amount payable:Rs.${Number(details.billAmt)}</p></strong>
                     </div>
                     <div class="card-footer">
                         <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewBillModal" onclick="viewItems('${id}')">View Items</i></a>

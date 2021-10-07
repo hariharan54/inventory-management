@@ -7,6 +7,11 @@ $(document).ready(function() {
     let values=JSON.parse(localStorage.getItem("inventory"));
     try{
         InvData=values.data;
+        if(InvData.length==0){
+            $('#selectedItem').append(`
+            <option value='-1' disabled selected>Please add inventory details first </option>
+    `);   
+        }
         for(let i=0;i<InvData.length;i++){
         $('#selectedItem').append(`
             <option value='${InvData[i].id}'>${InvData[i].name}</option>
@@ -14,7 +19,9 @@ $(document).ready(function() {
         }
     }
     catch(e){
-        console.log(e);
+        $('#selectedItem').append(`
+            <option value='-1' disabled selected>Please add inventory details first </option>
+    `);  
     }
     
 
@@ -43,6 +50,11 @@ $(document).ready(function() {
 });
 
 function addToBill(){
+    if(document.getElementById("billTitle").value=="" || document.getElementById("billTitle").value==null){
+        alert("enter a title");
+        return;
+    }
+
     let id=`bill-${Date.now()}`;
     console.log(id);
     const newBill={
@@ -147,6 +159,11 @@ function updateBillItem(){
     // console.log(inventoryID);
     // console.log(enteredQ);
     document.getElementById("billQ").value="";
+    if(inventoryID==-1){
+        alert("Add inventory details before proceeding");
+        return;
+    }
+    
     if(enteredQ<=0){
         alert("Invalid Quantity");
         return;

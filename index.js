@@ -5,12 +5,37 @@ function addInventory(){
     let sellingprice=document.getElementById("sellingPrice").value;
     let quantity=document.getElementById("prodQuantity").value;
 
-    if(sellingprice<0){
+    if(document.getElementById("prodName").value=="" || document.getElementById("prodName").value==null){
+        alert("enter product name");
+        document.getElementById("prodName").value="";
+        document.getElementById("prodCategory").value="";
+        document.getElementById("prodQuantity").value="";
+        document.getElementById("sellingPrice").value="";
+        return;
+    }
+    if(document.getElementById("prodCategory").value=="" || document.getElementById("prodCategory").value==null){
+        alert("enter product category");
+        document.getElementById("prodName").value="";
+        document.getElementById("prodCategory").value="";
+        document.getElementById("prodQuantity").value="";
+        document.getElementById("sellingPrice").value="";
+        return;
+    }
+
+    if(sellingprice<0 ||sellingprice==""||sellingprice==null){
         alert("Invalid selling price");
+        document.getElementById("prodName").value="";
+        document.getElementById("prodCategory").value="";
+        document.getElementById("prodQuantity").value="";
+        document.getElementById("sellingPrice").value="";
         return;
     }
     if(quantity<=0){
         alert("Invalid Quantity");
+        document.getElementById("prodName").value="";
+        document.getElementById("prodCategory").value="";
+        document.getElementById("prodQuantity").value="";
+        document.getElementById("sellingPrice").value="";
         return;
     }
 
@@ -113,7 +138,24 @@ function updateInventory(){
     let sellingprice=document.getElementById("sellingPriceUpdate").value;
     let quantity=document.getElementById("prodQuantityUpdate").value;
 
-    if(sellingprice<0){
+    if(document.getElementById("prodNameUpdate").value=="" || document.getElementById("prodNameUpdate").value==null){
+        alert("enter product name");
+        document.getElementById("prodNameUpdate").value="";
+        document.getElementById("prodCategoryUpdate").value="";
+        document.getElementById("prodQuantityUpdate").value="";
+        document.getElementById("sellingPriceUpdate").value="";
+        return;
+    }
+    if(document.getElementById("prodCategoryUpdate").value=="" || document.getElementById("prodCategoryUpdate").value==null){
+        alert("enter product category");
+        document.getElementById("prodName").value="";
+        document.getElementById("prodCategory").value="";
+        document.getElementById("prodQuantityUpdate").value="";
+        document.getElementById("sellingPriceUpdate").value="";
+        return;
+    }
+
+    if(sellingprice<0 ||sellingprice==""||sellingprice==null){
         alert("Invalid selling price");
         return;
     }

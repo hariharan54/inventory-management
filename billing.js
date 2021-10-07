@@ -17,6 +17,29 @@ $(document).ready(function() {
         console.log(e);
     }
     
+
+    //retrieve all array values
+    try{
+        let values=JSON.parse(localStorage.getItem("inventory"));
+        InvData=values.data;
+    }
+    catch{
+        console.log("error at array value copying");
+    }
+    try{
+        let values=JSON.parse(localStorage.getItem("bill"));
+        BillData=values.data;
+    }
+    catch{
+        console.log("error at array value copying");
+    }
+    try{
+        let values=JSON.parse(localStorage.getItem("billdetails"));
+        BillDetails=values.data;
+    }
+    catch{
+        console.log("error at array value copying");
+    }
 });
 
 function addToBill(){
@@ -29,9 +52,12 @@ function addToBill(){
 
     const billDet={
         id:id,
-        items:[],
-        billItems:0,
+        itemsID:[],
+        billItemName:[],
+        billQuantity:[],
         billAmt:0,
+        billAmtItemWise:[],
+        
     };
 
     document.getElementById("billTitle").value="";
@@ -55,7 +81,7 @@ const generateRow=({id,title},details)=>{
                     </div>
                     <div class="card-body">
                         <h4>${title}</h4>
-                        <p>No of Items:${details.billItems}</p>
+                        <p>No of Items:${details.itemsID.length}</p>
                         <span class="badge bg-success">Bill amount:${Number(details.billAmt)}</span>
                     </div>
                     <div class="card-footer">
@@ -111,6 +137,7 @@ function addBillItems(id){
 
 function updateBillItem(){
     let inventoryID=document.getElementById("selectedItem").value;
+    let inventoryName="";
     let enteredQ=document.getElementById("billQ").value;
     let Billid=document.getElementById("BillIDupdate").value;
     // console.log(Billid);
@@ -124,10 +151,12 @@ function updateBillItem(){
             diff=InvData[i].quantity-enteredQ;
             if(diff<0){
                 alert("Quantity cant be more than stock available");
+                return;
             }
             else{
                 InvData[i].quantity=InvData[i].quantity-enteredQ;
                 amt=parseInt(InvData[i].sp, 10)*parseInt(enteredQ, 10);
+                inventoryName=InvData[i].name;
             }
             break;
         }
@@ -138,10 +167,13 @@ function updateBillItem(){
        for(let j=0;j<BillDetails.length;j++){
            if(BillDetails[j].id===Billid){
                console.log(BillDetails[j]);
-               BillDetails[j].items.push(inventoryID);
-               BillDetails[j].billItems++;
+               BillDetails[j].billItemName.push(inventoryName);
+               BillDetails[j].itemsID.push(inventoryID);
                BillDetails[j].billAmt+=amt;
-                break;
+               BillDetails[j].billQuantity.push(Number(enteredQ));
+               BillDetails[j].billAmtItemWise.push(Number(amt));
+               console.log(BillDetails[j]); 
+               break;
             }
        }
        localStorage.setItem("billdetails",JSON.stringify({data:BillDetails}));
@@ -156,16 +188,24 @@ function viewItems(billid){
     let tbl=document.getElementById("bill-tbl-body");
     let tblrow="";
     let items=[];
+    let billdetails=JSON.parse(localStorage.getItem("billdetails"));
+    BillDetails=billdetails.data;
     for(let i=0;i<BillDetails.length;i++){
+        console.log(BillDetails[i]);
         if(BillDetails[i].id===billid){
-            items=BillDetails[i].items;
-        }
-    }
-
-    tblrow+=`
+            // alert("found");
+            for(let jj=0;jj<BillDetails[i].billItemName.length;jj++){
+                tblrow+=`
                 <tr>
-                <td></td>
-                <td></td>
+                <td>${BillDetails[i]["billItemName"][jj]}</td>
+                <td>${Number(BillDetails[i]["billQuantity"][jj])}</td>
+                <td>${Number(BillDetails[i]["billAmtItemWise"][jj])}</td>
                 </tr>
             `;
+            }
+        break;
+        }
+    }
+    tbl.innerHTML=tblrow;
+    
 }
